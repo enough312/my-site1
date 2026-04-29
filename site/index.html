@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Карта Лениногорска</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/style.css?v=3">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="map-stage" aria-label="Интерактивная карта Лениногорска">
+      <header class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Муниципальный конкурс «Юный программист»</p>
+          <h1>Интерактивная карта Лениногорска</h1>
+        </div>
+        <div class="quick-stats" aria-label="Статистика проекта">
+          <span><strong id="visibleCount">0</strong> мест</span>
+          <span><strong id="routeCount">0</strong> в маршруте</span>
+        </div>
+      </header>
+
+      <div id="map" class="city-map" role="application" aria-label="Карта с достопримечательностями Лениногорска">
+        <div id="mapCanvas" class="map-canvas">
+          <img class="real-map" src="assets/map/leninogorsk-osm.jpg" alt="Фрагмент карты Лениногорска OpenStreetMap">
+          <svg id="routeSvg" class="route-svg" viewBox="0 0 2200 895" aria-hidden="true" preserveAspectRatio="none">
+            <polyline id="routePath" points="" />
+          </svg>
+          <div id="pinLayer" class="pin-layer" aria-label="Точки на карте"></div>
+        </div>
+        <div class="map-toolbar" aria-label="Масштаб карты">
+          <button id="zoomOutButton" type="button" aria-label="Отдалить карту">−</button>
+          <span id="zoomLabel">100%</span>
+          <button id="zoomInButton" type="button" aria-label="Приблизить карту">+</button>
+          <button id="resetMapButton" type="button">Сброс</button>
+        </div>
+      </div>
+
+      <div class="map-controls" aria-label="Управление картой">
+        <label class="search-box">
+          <span>Поиск</span>
+          <input id="searchInput" type="search" placeholder="Например: музей, парк, нефть">
+        </label>
+        <div class="filter-row" aria-label="Фильтры по категориям">
+          <button class="filter-button active" type="button" data-category="all">Все</button>
+          <button class="filter-button" type="button" data-category="oil">Нефть</button>
+          <button class="filter-button" type="button" data-category="memory">Память</button>
+          <button class="filter-button" type="button" data-category="park">Парки</button>
+          <button class="filter-button" type="button" data-category="culture">Культура</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side-panel" aria-label="Карточка выбранного места">
+      <section class="place-card" id="placeCard">
+        <img id="placeImage" class="place-photo" src="" alt="">
+        <p class="eyebrow">Выбранное место</p>
+        <h2 id="placeTitle">Монумент первооткрывателям нефти</h2>
+        <p id="placeDescription">
+          Один из главных символов города: 33-метровый фонтан-монумент, посвященный геологам,
+          буровикам и нефтедобытчикам Татарстана.
+        </p>
+        <dl class="meta-grid">
+          <div>
+            <dt>Категория</dt>
+            <dd id="placeCategory">Нефтяная история</dd>
+          </div>
+          <div>
+            <dt>Год</dt>
+            <dd id="placeYear">1975</dd>
+          </div>
+          <div>
+            <dt>Адрес</dt>
+            <dd id="placeAddress">пр. Ленина, 21а</dd>
+          </div>
+        </dl>
+        <div class="action-row">
+          <button id="addRouteButton" class="primary-button" type="button">Добавить в маршрут</button>
+          <button id="focusButton" class="ghost-button" type="button">Подробнее</button>
+        </div>
+      </section>
+
+      <section class="tool-section">
+        <div class="section-heading">
+          <h2>Маршрут экскурсии</h2>
+          <button id="clearRouteButton" class="icon-button" type="button" title="Очистить маршрут" aria-label="Очистить маршрут">×</button>
+        </div>
+        <ol id="routeList" class="route-list"></ol>
+        <p class="empty-state" id="routeEmpty">Добавьте 2-4 места и получите короткий маршрут для школьной экскурсии.</p>
+      </section>
+
+      <section class="tool-section">
+        <div class="section-heading">
+          <h2>Мини-викторина</h2>
+          <span id="quizScore" class="score">0/3</span>
+        </div>
+        <p id="quizQuestion" class="quiz-question"></p>
+        <div id="quizOptions" class="quiz-options"></div>
+      </section>
+
+      <section class="tool-section sources">
+        <h2>Источники</h2>
+        <a href="https://leninogorsk-rt.ru/catalog/document/monument-pervootkryvateliam-nefti" target="_blank" rel="noreferrer">Лениногорские вести: монумент первооткрывателям нефти</a>
+        <a href="https://muzneft.tatneft.ru/kontakti/muzey-nefti-g-leninogorsk/?lang=ru" target="_blank" rel="noreferrer">ПАО «Татнефть»: Музей нефти</a>
+        <a href="https://leninogorsk-rt.ru/catalog/parki" target="_blank" rel="noreferrer">Лениногорские вести: парки города</a>
+        <a href="https://ru.wikipedia.org/wiki/Список_достопримечательностей_Лениногорска" target="_blank" rel="noreferrer">Список достопримечательностей Лениногорска</a>
+        <a href="https://www.openstreetmap.org/" target="_blank" rel="noreferrer">Картографическая основа: OpenStreetMap</a>
+      </section>
+    </aside>
+  </main>
+
+  <div id="detailOverlay" class="detail-overlay" hidden>
+    <article class="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button id="closeDetailButton" class="detail-close" type="button" aria-label="Закрыть подробную карточку">×</button>
+      <img id="detailImage" class="detail-photo" src="" alt="">
+      <div class="detail-body">
+        <p id="detailTag" class="eyebrow"></p>
+        <h2 id="detailTitle"></h2>
+        <p id="detailText"></p>
+        <dl class="detail-facts">
+          <div>
+            <dt>Адрес</dt>
+            <dd id="detailAddress"></dd>
+          </div>
+          <div>
+            <dt>Год</dt>
+            <dd id="detailYear"></dd>
+          </div>
+          <div>
+            <dt>Почему важно</dt>
+            <dd id="detailValue"></dd>
+          </div>
+        </dl>
+        <div class="detail-sections">
+          <section>
+            <h3>История</h3>
+            <p id="detailHistory"></p>
+          </section>
+          <section>
+            <h3>Что посмотреть</h3>
+            <p id="detailVisit"></p>
+          </section>
+          <section>
+            <h3>Интересный факт</h3>
+            <p id="detailFact"></p>
+          </section>
+        </div>
+        <a id="detailSource" class="source-link" href="#" target="_blank" rel="noreferrer">Источник фото и сведений</a>
+      </div>
+    </article>
+  </div>
+
+  <script src="js/app.js?v=3"></script>
+</body>
+</html>
