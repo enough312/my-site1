@@ -226,6 +226,21 @@ let selectedPlace = places[0];
 let route = JSON.parse(localStorage.getItem("leninogorskRoute") || "[]");
 let answered = new Set();
 let pins = new Map();
+let gallery = [];
+let galleryIndex = 0;
+let galleryTimer = null;
+
+const galleryFocus = {
+  "oil-monument": ["center", "50% 38%", "50% 62%"],
+  "oil-museum": ["center", "50% 45%", "50% 68%"],
+  "alley-heroes": ["center", "50% 36%", "50% 64%"],
+  "time-monument": ["center", "50% 30%", "50% 70%"],
+  "yubileiny": ["center", "50% 42%", "50% 68%"],
+  "makhabbat": ["center", "50% 48%", "68% 52%"],
+  "gorky-park": ["center", "50% 42%", "50% 70%"],
+  "ak-bars": ["center", "70% 52%", "50% 65%"],
+  "tuqay": ["center", "50% 38%", "50% 66%"]
+};
 
 const dom = {
   map: document.querySelector("#map"),
@@ -255,6 +270,7 @@ const dom = {
   quizScore: document.querySelector("#quizScore"),
   detailOverlay: document.querySelector("#detailOverlay"),
   detailImage: document.querySelector("#detailImage"),
+  galleryDots: document.querySelector("#galleryDots"),
   detailTag: document.querySelector("#detailTag"),
   detailTitle: document.querySelector("#detailTitle"),
   detailText: document.querySelector("#detailText"),
@@ -331,9 +347,65 @@ function selectPlace(id, scrollToMap) {
   }
 }
 
+function getPlaceGallery(place) {
+  const positions = galleryFocus[place.id] || ["center", "50% 42%", "50% 66%"];
+  return [
+    { src: place.image, label: "Общий вид", fit: "contain", position: positions[0] },
+    { src: place.image, label: "Крупный план", fit: "cover", position: positions[1] },
+    { src: place.image, label: "Детали места", fit: "cover", position: positions[2] }
+  ];
+}
+
+function renderGalleryDots() {
+  dom.galleryDots.innerHTML = "";
+  gallery.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "gallery-dot";
+    button.setAttribute("aria-label", `${item.label}: фото ${index + 1}`);
+    button.addEventListener("click", () => {
+      showGalleryImage(index);
+      startGalleryAutoplay();
+    });
+    dom.galleryDots.append(button);
+  });
+}
+
+function showGalleryImage(index) {
+  if (!gallery.length) return;
+  galleryIndex = (index + gallery.length) % gallery.length;
+  const item = gallery[galleryIndex];
+  dom.detailImage.src = item.src;
+  dom.detailImage.alt = `${selectedPlace.title}. ${item.label}`;
+  dom.detailImage.style.objectFit = item.fit;
+  dom.detailImage.style.objectPosition = item.position;
+  dom.galleryDots.querySelectorAll(".gallery-dot").forEach((button, buttonIndex) => {
+    button.classList.toggle("active", buttonIndex === galleryIndex);
+  });
+}
+
+function startGalleryAutoplay() {
+  stopGalleryAutoplay();
+  if (gallery.length < 2 || dom.detailOverlay.hidden) return;
+  galleryTimer = window.setTimeout(() => {
+    showGalleryImage(galleryIndex + 1);
+    startGalleryAutoplay();
+  }, 10000);
+}
+
+function stopGalleryAutoplay() {
+  if (galleryTimer) {
+    window.clearTimeout(galleryTimer);
+    galleryTimer = null;
+  }
+}
+
 function openDetails(place = selectedPlace) {
-  dom.detailImage.src = place.image;
-  dom.detailImage.alt = place.title;
+  selectedPlace = place;
+  gallery = getPlaceGallery(place);
+  galleryIndex = 0;
+  renderGalleryDots();
+  showGalleryImage(0);
   dom.detailTag.textContent = place.categoryLabel;
   dom.detailTitle.textContent = place.title;
   dom.detailText.textContent = place.details;
@@ -345,10 +417,12 @@ function openDetails(place = selectedPlace) {
   dom.detailFact.textContent = place.fact;
   dom.detailSource.href = place.imageSource;
   dom.detailOverlay.hidden = false;
+  startGalleryAutoplay();
   dom.closeDetailButton.focus();
 }
 
 function closeDetails() {
+  stopGalleryAutoplay();
   dom.detailOverlay.hidden = true;
 }
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Карта Лениногорска</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
   <main class="app-shell">
@@ -118,7 +118,10 @@
   <div id="detailOverlay" class="detail-overlay" hidden>
     <article class="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
       <button id="closeDetailButton" class="detail-close" type="button" aria-label="Закрыть подробную карточку">×</button>
-      <img id="detailImage" class="detail-photo" src="" alt="">
+      <div class="detail-gallery" aria-label="Фотографии выбранного места">
+        <img id="detailImage" class="detail-photo" src="" alt="">
+        <div id="galleryDots" class="gallery-dots" aria-label="Переключение фотографий"></div>
+      </div>
       <div class="detail-body">
         <p id="detailTag" class="eyebrow"></p>
         <h2 id="detailTitle"></h2>
@@ -156,6 +159,6 @@
     </article>
   </div>
 
-  <script src="js/app.js?v=5"></script>
+  <script src="js/app.js?v=6"></script>
 </body>
 </html>
