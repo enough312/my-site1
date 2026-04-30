@@ -424,18 +424,6 @@ h2 {
   background: linear-gradient(90deg, var(--gold), var(--green), var(--blue));
 }
 
-.place-thumb {
-  width: 100%;
-  height: 150px;
-  display: block;
-  margin: 2px 0 14px;
-  border: 1px solid rgba(24, 39, 34, 0.12);
-  border-radius: 8px;
-  object-fit: cover;
-  background: #edf4ef;
-  box-shadow: 0 10px 24px rgba(24, 39, 34, 0.09);
-}
-
 .place-card p {
   margin: 10px 0 0;
   color: var(--muted);
@@ -597,6 +585,7 @@ h2 {
   display: grid;
   place-items: center;
   padding: 22px;
+  overflow-y: auto;
   background: rgba(10, 22, 18, 0.62);
   backdrop-filter: blur(12px);
 }
@@ -608,7 +597,8 @@ h2 {
 .detail-dialog {
   position: relative;
   width: min(1080px, 100%);
-  max-height: min(90vh, 820px);
+  height: min(90dvh, 820px);
+  min-height: 0;
   display: grid;
   grid-template-columns: minmax(340px, 0.82fr) minmax(410px, 1fr);
   overflow: hidden;
@@ -622,7 +612,7 @@ h2 {
   width: 100%;
   height: 100%;
   min-height: 0;
-  max-height: min(90vh, 820px);
+  min-width: 0;
   object-fit: contain;
   padding: 18px;
   background:
@@ -631,11 +621,14 @@ h2 {
 }
 
 .detail-body {
+  min-height: 0;
   display: grid;
   align-content: start;
   gap: 13px;
   padding: 30px;
-  overflow: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .detail-body h2 {
@@ -898,7 +891,7 @@ h2 {
 
   .detail-dialog {
     width: 100%;
-    max-height: none;
+    height: 100dvh;
     min-height: 100dvh;
     grid-template-columns: 1fr;
     grid-template-rows: 245px minmax(0, 1fr);

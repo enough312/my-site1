@@ -245,7 +245,6 @@ const dom = {
   category: document.querySelector("#placeCategory"),
   year: document.querySelector("#placeYear"),
   address: document.querySelector("#placeAddress"),
-  placeThumb: document.querySelector("#placeThumb"),
   addRouteButton: document.querySelector("#addRouteButton"),
   focusButton: document.querySelector("#focusButton"),
   clearRouteButton: document.querySelector("#clearRouteButton"),
@@ -317,8 +316,6 @@ function initPins() {
 function selectPlace(id, scrollToMap) {
   selectedPlace = places.find((place) => place.id === id) || places[0];
   dom.title.textContent = selectedPlace.title;
-  dom.placeThumb.src = selectedPlace.image;
-  dom.placeThumb.alt = selectedPlace.title;
   dom.description.textContent = selectedPlace.description;
   dom.category.textContent = selectedPlace.categoryLabel;
   dom.year.textContent = selectedPlace.year;
