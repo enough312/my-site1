@@ -7,8 +7,9 @@ const places = [
     year: "1975",
     address: "пр. Ленина, 21а",
     coords: [54.59944, 52.44167],
+    offset: [-22, 10],
     image: "assets/photos/oil-monument.jpg",
-    imageSource: "https://leninogorsk-rt.ru/catalog/document/monument-pervootkryvateliam-nefti",
+    imageSource: "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%BE%D0%BD%D1%83%D0%BC%D0%B5%D0%BD%D1%82_%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%D0%BC_%D0%BD%D0%B5%D1%84%D1%82%D0%B8.jpg",
     short: "33-метровый символ нефтяной истории города.",
     description: "Один из главных символов Лениногорска. Монумент посвящен геологам, буровикам и нефтедобытчикам, стоявшим у истоков нефтяной отрасли Татарстана.",
     details: "В центре монумента расположен стальной нефтяной фонтан высотой 33 метра. Композиция напоминает о Ромашкинском месторождении, первых буровиках и людях, благодаря которым Лениногорск стал важной точкой нефтяной истории Татарстана.",
@@ -25,6 +26,7 @@ const places = [
     year: "1968",
     address: "ул. Ленина, 3",
     coords: [54.60155, 52.44445],
+    offset: [8, -8],
     image: "assets/photos/oil-museum.jpg",
     imageSource: "https://muzneft.tatneft.ru/fotogalereya/?lang=ru",
     short: "Первый в СССР музей нефти.",
@@ -43,6 +45,7 @@ const places = [
     year: "1970",
     address: "пр. 50 лет Победы",
     coords: [54.60028, 52.44472],
+    offset: [34, 4],
     image: "assets/photos/alley-heroes.jpg",
     imageSource: "https://leninogorsk-rt.ru/catalog/document/alleia-geroev",
     short: "Мемориальный комплекс памяти защитников Отечества.",
@@ -80,7 +83,7 @@ const places = [
     address: "пересечение улиц Чайковского и Тукая",
     coords: [54.59667, 52.4549],
     image: "assets/photos/yubileiny.jpg",
-    imageSource: "https://leninogorsk-rt.ru/catalog/parki",
+    imageSource: "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D1%80%D0%BA_%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9,_%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%BE%D0%B3%D0%BE%D1%80%D1%81%D0%BA.jpg",
     short: "Парк отдыха, открытый к 50-летию города.",
     description: "Место отдыха для детей, молодежи и взрослых. В проекте парк отмечен как точка семейного маршрута по Лениногорску.",
     details: "Парк открыт в честь 50-летия Лениногорска. Его можно использовать как остановку для семейного маршрута: здесь удобно обсуждать городскую среду, благоустройство и места отдыха для жителей.",
@@ -97,8 +100,9 @@ const places = [
     year: "2007",
     address: "пересечение улиц Гагарина и Ленинградской",
     coords: [54.60685, 52.46015],
+    offset: [-38, -8],
     image: "assets/photos/makhabbat.jpg",
-    imageSource: "https://leninogorsk-rt.ru/catalog/parki",
+    imageSource: "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D1%80%D0%BA_%D0%9C%D1%8D%D1%85%D1%8D%D0%B1%D0%B1%D1%8D%D1%82,_%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%BE%D0%B3%D0%BE%D1%80%D1%81%D0%BA.jpg",
     short: "Парк с декоративными мостиками и фонтаном «Ак Барс».",
     description: "Парк известен водоемом, декоративными мостиками, детской площадкой и фонтаном «Ак Барс».",
     details: "Парк открыт в 2007 году. На его территории есть водоем, декоративные мостики, детская площадка и фонтан «Ак Барс». Это одно из узнаваемых мест для прогулок и городских фотографий.",
@@ -116,7 +120,7 @@ const places = [
     address: "ул. Шашина, 1",
     coords: [54.60833, 52.44972],
     image: "assets/photos/gorky-park.jpg",
-    imageSource: "https://leninogorsk-rt.ru/catalog/parki",
+    imageSource: "https://commons.wikimedia.org/wiki/File:Leninogorsk_Lesopark.jpg",
     short: "Крупная лесопарковая зона со спортивными объектами.",
     description: "Парк открыт в 1956 году. На территории находятся спортивные объекты школы олимпийского резерва, прогулочные зоны и памятник М. Горькому.",
     details: "Парк им. М. Горького расположен в северной части города. Он сочетает лесопарковую территорию, прогулочные зоны и спортивные объекты школы олимпийского резерва.",
@@ -133,6 +137,7 @@ const places = [
     year: "2007",
     address: "ул. Набережная, парк «Мэхэббэт»",
     coords: [54.60639, 52.46167],
+    offset: [36, 8],
     image: "assets/photos/ak-bars.jpg",
     imageSource: "https://leninogorsk-rt.ru/catalog/parki",
     short: "Фонтан со скульптурой барса в парке «Мэхэббэт».",
@@ -151,6 +156,7 @@ const places = [
     year: "2000",
     address: "пересечение ул. Тукая и пр. Ленина",
     coords: [54.6, 52.44556],
+    offset: [14, 30],
     image: "assets/photos/tuqay.jpg",
     imageSource: "https://slava-dan.tatarstan.ru/gabdulla-tukay.htm",
     short: "Памятник татарскому поэту и общественному деятелю.",
@@ -239,6 +245,7 @@ const dom = {
   category: document.querySelector("#placeCategory"),
   year: document.querySelector("#placeYear"),
   address: document.querySelector("#placeAddress"),
+  placeThumb: document.querySelector("#placeThumb"),
   addRouteButton: document.querySelector("#addRouteButton"),
   focusButton: document.querySelector("#focusButton"),
   clearRouteButton: document.querySelector("#clearRouteButton"),
@@ -291,6 +298,8 @@ function initPins() {
     pin.className = `map-pin pin-${place.category}`;
     pin.style.left = position.left;
     pin.style.top = position.top;
+    pin.style.marginLeft = `${place.offset?.[0] || 0}px`;
+    pin.style.marginTop = `${place.offset?.[1] || 0}px`;
     pin.style.setProperty("--pin-photo", `url("../${place.image}")`);
     pin.dataset.id = place.id;
     pin.title = `${place.title}. ${place.short}`;
@@ -308,6 +317,8 @@ function initPins() {
 function selectPlace(id, scrollToMap) {
   selectedPlace = places.find((place) => place.id === id) || places[0];
   dom.title.textContent = selectedPlace.title;
+  dom.placeThumb.src = selectedPlace.image;
+  dom.placeThumb.alt = selectedPlace.title;
   dom.description.textContent = selectedPlace.description;
   dom.category.textContent = selectedPlace.categoryLabel;
   dom.year.textContent = selectedPlace.year;
