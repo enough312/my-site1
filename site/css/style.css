@@ -39,7 +39,7 @@ button {
 
 .app-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 410px;
+  grid-template-columns: minmax(0, 1fr) 390px;
   min-height: 100vh;
   gap: 0;
 }
@@ -47,9 +47,9 @@ button {
 .map-stage {
   position: relative;
   min-width: 0;
-  padding: 18px;
+  padding: 18px 18px 20px;
   display: grid;
-  grid-template-rows: auto minmax(420px, 1fr) auto;
+  grid-template-rows: auto minmax(410px, 1fr) auto;
   gap: 14px;
   overflow: hidden;
 }
@@ -86,8 +86,8 @@ p {
 h1 {
   margin: 0;
   max-width: 680px;
-  font-size: clamp(1.65rem, 3.1vw, 3.4rem);
-  line-height: 1;
+  font-size: clamp(1.65rem, 2.7vw, 3.05rem);
+  line-height: 1.04;
   letter-spacing: 0;
 }
 
@@ -135,6 +135,7 @@ h2 {
   background: #dcefe8;
   box-shadow: var(--shadow);
   isolation: isolate;
+  min-height: 410px;
 }
 
 .map-canvas,
@@ -189,8 +190,8 @@ h2 {
 
 .map-pin {
   position: absolute;
-  width: 58px;
-  height: 58px;
+  width: 50px;
+  height: 50px;
   display: grid;
   place-items: center;
   border: 4px solid #fff;
@@ -221,8 +222,8 @@ h2 {
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border: 2px solid #fff;
   border-radius: 50%;
   font-size: 0.72rem;
@@ -379,8 +380,8 @@ h2 {
   z-index: 2;
   display: grid;
   align-content: start;
-  gap: 14px;
-  padding: 18px;
+  gap: 12px;
+  padding: 16px;
   height: 100vh;
   overflow: auto;
   border-left: 1px solid rgba(24, 39, 34, 0.1);
@@ -393,7 +394,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.92);
-  padding: 16px;
+  padding: 15px;
 }
 
 .place-card {
@@ -412,16 +413,6 @@ h2 {
   background: linear-gradient(90deg, var(--gold), var(--green), var(--blue));
 }
 
-.place-photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: 0 0 14px;
-  border-radius: 8px;
-  object-fit: cover;
-  background: #dcefe8;
-}
-
 .place-card p {
   margin: 10px 0 0;
   color: var(--muted);
@@ -432,7 +423,7 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin: 16px 0;
+  margin: 14px 0;
 }
 
 .meta-grid div {
@@ -593,10 +584,10 @@ h2 {
 
 .detail-dialog {
   position: relative;
-  width: min(920px, 100%);
+  width: min(980px, 100%);
   max-height: min(88vh, 820px);
   display: grid;
-  grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1fr);
+  grid-template-columns: minmax(300px, 0.92fr) minmax(360px, 1fr);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
@@ -607,7 +598,7 @@ h2 {
 .detail-photo {
   width: 100%;
   height: 100%;
-  min-height: 420px;
+  min-height: 460px;
   object-fit: cover;
   background: #dcefe8;
 }
@@ -616,7 +607,7 @@ h2 {
   display: grid;
   align-content: start;
   gap: 12px;
-  padding: 24px;
+  padding: 26px;
   overflow: auto;
 }
 
@@ -702,6 +693,20 @@ h2 {
   font-weight: 800;
 }
 
+.project-footer {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr) 420px;
+  }
+
+  .side-panel {
+    padding: 18px;
+  }
+}
+
 @keyframes pulse {
   from {
     opacity: 0.7;
@@ -717,6 +722,7 @@ h2 {
 @media (max-width: 1040px) {
   .app-shell {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .map-stage {
@@ -730,12 +736,21 @@ h2 {
     border-left: 0;
     border-top: 1px solid rgba(24, 39, 34, 0.1);
   }
+
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
 }
 
 @media (max-width: 720px) {
   .map-stage {
     padding: 12px;
-    grid-template-rows: auto minmax(360px, 54vh) auto;
+    grid-template-rows: auto minmax(360px, 52vh) auto;
     gap: 10px;
   }
 
@@ -796,8 +811,8 @@ h2 {
   }
 
   .map-pin {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-width: 3px;
   }
 
@@ -808,8 +823,8 @@ h2 {
   .map-pin span {
     right: -6px;
     bottom: -6px;
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     font-size: 0.64rem;
   }
 }
@@ -820,8 +835,8 @@ h2 {
   }
 
   .map-pin {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .map-pin span {

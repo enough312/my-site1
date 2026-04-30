@@ -244,7 +244,6 @@ const dom = {
   clearRouteButton: document.querySelector("#clearRouteButton"),
   routeList: document.querySelector("#routeList"),
   routeEmpty: document.querySelector("#routeEmpty"),
-  placeImage: document.querySelector("#placeImage"),
   quizQuestion: document.querySelector("#quizQuestion"),
   quizOptions: document.querySelector("#quizOptions"),
   quizScore: document.querySelector("#quizScore"),
@@ -313,8 +312,6 @@ function selectPlace(id, scrollToMap) {
   dom.category.textContent = selectedPlace.categoryLabel;
   dom.year.textContent = selectedPlace.year;
   dom.address.textContent = selectedPlace.address;
-  dom.placeImage.src = selectedPlace.image;
-  dom.placeImage.alt = selectedPlace.title;
   dom.addRouteButton.textContent = route.includes(selectedPlace.id) ? "Уже в маршруте" : "Добавить в маршрут";
 
   pins.forEach((pin) => pin.classList.remove("active"));
