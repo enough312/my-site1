@@ -252,6 +252,12 @@ const mapTransform = {
   originY: 0
 };
 
+const photoVersion = "20260501-quality-gallery";
+
+function versionedPhoto(src) {
+  return `${src}?v=${photoVersion}`;
+}
+
 const quiz = [
   {
     question: "Какой объект считается одним из главных символов Лениногорска?",
@@ -417,7 +423,7 @@ function initPins() {
     pin.style.top = position.top;
     pin.style.marginLeft = `${place.offset?.[0] || 0}px`;
     pin.style.marginTop = `${place.offset?.[1] || 0}px`;
-    pin.style.setProperty("--pin-photo", `url("../${place.image}")`);
+    pin.style.setProperty("--pin-photo", `url("../${versionedPhoto(place.image)}")`);
     pin.dataset.id = place.id;
     pin.title = `${place.title}. ${place.short}`;
     pin.setAttribute("aria-label", `Точка на карте: ${place.title}`);
@@ -452,7 +458,7 @@ function selectPlace(id, scrollToMap) {
 function getPlaceGallery(place) {
   if (place.gallery && place.gallery.length) {
     return place.gallery.map((src, index) => ({
-      src,
+      src: versionedPhoto(src),
       label: index === 0 ? "Общий вид" : index === 1 ? "Дополнительный ракурс" : "Детали места",
       fit: "contain",
       position: "center"
@@ -461,9 +467,9 @@ function getPlaceGallery(place) {
 
   const positions = galleryFocus[place.id] || ["center", "50% 42%", "50% 66%"];
   return [
-    { src: place.image, label: "Общий вид", fit: "contain", position: positions[0] },
-    { src: place.image, label: "Крупный план", fit: "cover", position: positions[1] },
-    { src: place.image, label: "Детали места", fit: "cover", position: positions[2] }
+    { src: versionedPhoto(place.image), label: "Общий вид", fit: "contain", position: positions[0] },
+    { src: versionedPhoto(place.image), label: "Крупный план", fit: "cover", position: positions[1] },
+    { src: versionedPhoto(place.image), label: "Детали места", fit: "cover", position: positions[2] }
   ];
 }
 
