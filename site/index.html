@@ -21,6 +21,13 @@
         </div>
       </header>
 
+      <div class="map-toolbar" aria-label="Масштаб карты">
+        <button id="zoomOutButton" type="button" aria-label="Отдалить карту">−</button>
+        <span id="zoomLabel">100%</span>
+        <button id="zoomInButton" type="button" aria-label="Приблизить карту">+</button>
+        <button id="resetMapButton" type="button">Сброс</button>
+      </div>
+
       <div id="map" class="city-map" role="application" aria-label="Карта с достопримечательностями Лениногорска">
         <div id="mapCanvas" class="map-canvas">
           <img class="real-map" src="assets/map/leninogorsk-osm.jpg" alt="Фрагмент карты Лениногорска OpenStreetMap">
@@ -28,12 +35,6 @@
             <polyline id="routePath" points="" />
           </svg>
           <div id="pinLayer" class="pin-layer" aria-label="Точки на карте"></div>
-        </div>
-        <div class="map-toolbar" aria-label="Масштаб карты">
-          <button id="zoomOutButton" type="button" aria-label="Отдалить карту">−</button>
-          <span id="zoomLabel">100%</span>
-          <button id="zoomInButton" type="button" aria-label="Приблизить карту">+</button>
-          <button id="resetMapButton" type="button">Сброс</button>
         </div>
       </div>
 
@@ -169,6 +170,6 @@
     </article>
   </div>
 
-  <script src="js/app.js?v=11"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>

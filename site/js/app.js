@@ -643,7 +643,16 @@ function resetMapTransform() {
 }
 
 function startMapDrag(event) {
-  if (mapTransform.scale <= 1) return;
+  if (event.target.closest(".map-pin")) return;
+  const rect = dom.map.getBoundingClientRect();
+  const canvasWidth = Number.parseFloat(dom.mapCanvas.style.width) || rect.width;
+  const canvasHeight = Number.parseFloat(dom.mapCanvas.style.height) || rect.height;
+  const canMoveX = canvasWidth * mapTransform.scale > rect.width + 1;
+  const canMoveY = canvasHeight * mapTransform.scale > rect.height + 1;
+  if (!canMoveX && !canMoveY) return;
+
+  event.preventDefault();
+  dom.mapCanvas.setPointerCapture?.(event.pointerId);
   mapTransform.dragging = true;
   mapTransform.startX = event.clientX;
   mapTransform.startY = event.clientY;
@@ -654,12 +663,16 @@ function startMapDrag(event) {
 
 function moveMapDrag(event) {
   if (!mapTransform.dragging) return;
+  event.preventDefault();
   mapTransform.x = mapTransform.originX + event.clientX - mapTransform.startX;
   mapTransform.y = mapTransform.originY + event.clientY - mapTransform.startY;
   applyMapTransform();
 }
 
-function endMapDrag() {
+function endMapDrag(event) {
+  if (event?.pointerId !== undefined && dom.mapCanvas.hasPointerCapture?.(event.pointerId)) {
+    dom.mapCanvas.releasePointerCapture(event.pointerId);
+  }
   mapTransform.dragging = false;
   dom.mapCanvas.classList.remove("dragging");
 }
